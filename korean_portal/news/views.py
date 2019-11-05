@@ -16,13 +16,18 @@ posts = [
 ]
 
 def home(request):
-    return render(request, 'news/home.html')
+    context = {
+        'posts': posts,
+        'title': 'Главная'
+    }
+
+    return render(request, 'news/home.html', context)
 
 
 def about(request):
     context = {
         'posts': posts,
-        'title': 'About'
+        'title': 'О нас'
     }
-    
+
     return render(request, 'news/about.html', context)

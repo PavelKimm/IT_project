@@ -1,4 +1,0 @@
-Для начала была создана виртуальная среда с помощью команды 'virtualenv venv'.
-После активации виртуальной среды командой '. venv/bin/activate' был установлен модуль Django командой 'pip install django'.
-Для создания проекта с названием 'korean_portal' была выполнена команда 'django-admin startproject korean_portal'.
-Далее внутри данного проекта было создано приложение 'news' с помощью команды 'python manage.py startapp news'.
