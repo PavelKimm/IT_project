@@ -7,7 +7,7 @@
  .mx-2 {
    margin-left: 0.5rem !important;
  }
- a.sign-in {
+ a.sign-in, a.sign-up {
   color: #007bff;
   text-decoration: none;
   background-color: transparent;

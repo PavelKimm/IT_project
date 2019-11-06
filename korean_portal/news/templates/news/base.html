@@ -42,7 +42,21 @@
                               </div>
                           </div>
                           <ul id="nav" class="nav navbar-nav cl-effect-11">
-                            {% block navmenu %}{% endblock %}
+                            <li class="{% if news_home %}active{% endif %}"><a href="{% url 'news-home' %}">Main</a></li>
+                            <li class="{% if news_about %}active{% endif %}"><a href="{% url 'news-about' %}">About Us</a></li>
+                            <li class="{% if news_events %}active{% endif %}"><a href="events.html">Events</a></li>
+                            <li class="{% if news_contacts %}active{% endif %}"><a href="contact-us.html">Contacts</a></li>
+                            {% if user.is_authenticated %}
+                              <li class="{% if users_profile %}active{% endif %}"><a href="{% url 'profile' %}">Profile</a></li>
+                              <li><a href="{% url 'logout' %}">Log Out</a></li>
+                            {% else %}
+                              <li class="{% if users_auth %}active{% endif %}"><a class="at-drop-down" href="#">Auth<i class="hidden-md hidden-lg fa fa-angle-down"></i></a>
+                                <ul class="sub-menu">
+                                  <li><a href="{% url 'login' %}">Log In</a></li>
+                                  <li><a href="{% url 'register' %}">Register</a></li>
+                                </ul>
+                              </li>
+                            {% endif %}
                           </ul>
                       </div>
                   </div>

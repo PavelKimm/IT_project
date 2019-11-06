@@ -1,17 +1,5 @@
 {% extends 'news/base.html' %}
-
-{% block navmenu %}
-  <li><a href="{% url 'news-home' %}">Главная</a></li>
-  <li class="active"><a href="{% url 'news-about' %}">О нас</a></li>
-  <li><a href="events.html">Events</a></li>
-  <li><a href="contact-us.html">Контакты</a></li>
-  <li><a class="at-drop-down">Войти на сайт <i class="hidden-md hidden-lg fa fa-angle-down"></i></a>
-    <ul class="sub-menu">
-      <li><a href="#">Авторизация</a></li>
-      <li><a href="{% url 'register' %}">Регистрация</a></li>
-    </ul>
-  </li>
-{% endblock navmenu %}
+{% load static %}
 
 {% block content %}
   {% for post in posts %}

@@ -5,7 +5,8 @@ from .models import Post
 def home(request):
     context = {
         'posts': Post.objects.all(),
-        'title': 'Главная'
+        'title': 'Main',
+        'news_home': True
     }
 
     return render(request, 'news/home.html', context)
@@ -14,7 +15,8 @@ def home(request):
 def about(request):
     context = {
         'posts': Post.objects.all(),
-        'title': 'О нас'
+        'title': 'About Us',
+        'news_about': True
     }
 
     return render(request, 'news/about.html', context)
