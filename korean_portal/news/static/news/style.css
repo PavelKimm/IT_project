@@ -686,7 +686,7 @@ a.read-more {
     font-weight: 700;
     letter-spacing: 2px;
     margin-top: 30px;
-    margin-left: 15px;
+    margin-left: 5px;
     padding: 7px 23px;
     text-transform: uppercase;
 }
@@ -1805,8 +1805,8 @@ ul.page-pagination li a {
     background: #C32E2E none repeat scroll 0 0;
 }
 
-.social-widget ul li.s_dribbble a {
-    background: #C93292 none repeat scroll 0 0;
+.social-widget ul li.s_instagram a {
+    background: rgb(216, 69, 136) none repeat scroll 0 0;
 }
 
 .social-widget ul li a:hover {
@@ -2148,7 +2148,7 @@ ul.blog-instagram-feed-widget li {
 
 
 
-  
+
   .content-section {
     background: #ffffff;
     padding: 10px 20px;
@@ -2156,46 +2156,46 @@ ul.blog-instagram-feed-widget li {
     border-radius: 3px;
     margin-bottom: 20px;
   }
-  
+
   a.article-title:hover {
     color: #428bca;
     text-decoration: none;
   }
-  
+
   .article-content {
     white-space: pre-line;
   }
-  
+
   .article-img {
     height: 65px;
     width: 65px;
     margin-right: 16px;
   }
-  
+
   .article-metadata {
     padding-bottom: 1px;
     margin-bottom: 4px;
     border-bottom: 1px solid #e3e3e3
   }
-  
+
   .article-metadata a:hover {
     color: #333;
     text-decoration: none;
   }
-  
+
   .article-svg {
     width: 25px;
     height: 25px;
     vertical-align: middle;
   }
-  
+
   .account-img {
     height: 125px;
     width: 125px;
     margin-right: 20px;
     margin-bottom: 16px;
   }
-  
+
   .account-heading {
     font-size: 2.5rem;
   }
