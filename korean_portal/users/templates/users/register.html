@@ -1,0 +1,35 @@
+{% extends 'news/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block navmenu %}
+  <li><a href="{% url 'news-home' %}">Главная</a></li>
+  <li><a href="{% url 'news-about' %}">О нас</a></li>
+  <li><a href="events.html">Events</a></li>
+  <li><a href="contact-us.html">Контакты</a></li>
+  <li class="active"><a class="at-drop-down">Войти на сайт <i class="hidden-md hidden-lg fa fa-angle-down"></i></a>
+    <ul class="sub-menu">
+      <li><a href="#">Авторизация</a></li>
+      <li><a href="{% url 'register' %}">Регистрация</a></li>
+    </ul>
+  </li>
+{% endblock navmenu %}
+
+{% block content %}
+  <div class="content-section">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Join Today</legend>
+        {{ form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Sign Up</button>
+      </div>
+    </form>
+    <div class="border-top pt-3">
+      <small class="text-muted">
+        Already Have An Account? <a href="#" class="sign-in ml-2">Sign In</a>
+      </small>
+    </div>
+  </div>
+{% endblock content %}

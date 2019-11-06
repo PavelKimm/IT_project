@@ -2,33 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--====== USEFULL META ======-->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Owl Restaurant is a simple video landing website" />
-    <meta name="keywords" content="Video, youtube, vimeo" />
+    <meta name="keywords" content="Video, news, korean" />
     <!--====== TITLE TAG ======-->
     {% if title %}
       <title>Korean Portal – {{ title }}</title>
     {% else %}
       <title>Korean Portal</title>
     {% endif %}
-    <!--====== FAVICON ICON =======-->
+    <!--====== ICON =======-->
     <link rel="shortcut icon" type="image/ico" href="{% static 'news/img/icon.png' %}">
     <!--====== STYLESHEETS ======-->
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/normalize.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/animate.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/pogo-slider.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/owl.carousel.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/datepicker.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/timepicker.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/magnific-popup.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'news/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'news/css/font-awesome.min.css' %}">
-    <!--====== MAIN STYLESHEETS ======-->
     <link rel="stylesheet" type="text/css" href="{% static 'news/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/responsive.css' %}">
 
     <script src="{% static 'news/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 </head>
@@ -54,16 +42,7 @@
                               </div>
                           </div>
                           <ul id="nav" class="nav navbar-nav cl-effect-11">
-                              <li class="active"><a href="/">Главная</a></li>
-                              <li><a href="{% url 'news-about' %}">О нас</a></li>
-                              <li><a href="events.html">Events</a></li>
-                              <li><a href="contact-us.html">Контакты</a></li>
-                              <li><a class="at-drop-down">Войти на сайт <i class="hidden-md hidden-lg fa fa-angle-down"></i></a>
-                                  <ul class="sub-menu">
-                                      <li><a href="#">Авторизация</a></li>
-                                      <li><a href="#">Регистрация</a></li>
-                                  </ul>
-                              </li>
+                            {% block navmenu %}{% endblock %}
                           </ul>
                       </div>
                   </div>
@@ -96,7 +75,14 @@
 
               <!--MAIN CONTENT-->
               <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
-                  {% block content %}{% endblock %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
               </div>
 
               <!--SIDEBAR-->

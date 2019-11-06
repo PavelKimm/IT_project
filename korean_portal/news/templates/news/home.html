@@ -1,9 +1,21 @@
 {% extends 'news/base.html' %}
 {% load static %}
 
+{% block navmenu %}
+  <li class="active"><a href="{% url 'news-home' %}">Главная</a></li>
+  <li><a href="{% url 'news-about' %}">О нас</a></li>
+  <li><a href="events.html">Events</a></li>
+  <li><a href="contact-us.html">Контакты</a></li>
+  <li><a class="at-drop-down">Войти на сайт <i class="hidden-md hidden-lg fa fa-angle-down"></i></a>
+    <ul class="sub-menu">
+      <li><a href="#">Авторизация</a></li>
+      <li><a href="{% url 'register' %}">Регистрация</a></li>
+    </ul>
+  </li>
+{% endblock navmenu %}
+
 {% block content %}
   {% for post in posts %}
-
   <div class="single-blog text-center wow fadeIn">
       <div class="blog-image-sldie">
           <img src="{% static 'news/img/blog/main_blog/test.jpg' %}" alt="">
@@ -19,6 +31,5 @@
           </div>
       </div>
   </div>
-
   {% endfor %}
 {% endblock content %}
