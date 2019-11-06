@@ -10,7 +10,7 @@
       <div class="blog-details">
           <div class="title-and-meta text-left">
               <h3><a href="#">{{ post.title }}</a></h3>
-              <p class="post-meta">Автор: <a href="#">{{ post.author }}</a> | <a href="#">{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
+              <p class="post-meta">Автор:<a href="#">{{ post.author }}</a>|<a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
           </div>
           <div class="blog-content text-left">
               <p>{{ post.content }}</p>
