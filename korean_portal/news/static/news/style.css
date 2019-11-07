@@ -599,6 +599,10 @@ a.search-form-trigger::before {
     outline: none;
 }
 
+img.rounded-circle.account-img {
+    float: left;
+}
+
 @media only screen and (min-width: 1024px) {
     .search-form {
         height: 120px;
@@ -2197,5 +2201,5 @@ ul.blog-instagram-feed-widget li {
   }
 
   .account-heading {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
