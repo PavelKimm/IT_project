@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block content %}
+  {% if user.is_staff %}
+    <a class="btn btn-outline-success" href="{% url 'post-create' %}">Create a new post</a>
+  {% endif %}
   {% for post in posts %}
   <div class="single-blog text-center wow fadeIn">
       <div class="blog-image-sldie">

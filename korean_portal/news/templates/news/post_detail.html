@@ -14,6 +14,13 @@
           <div class="blog-content text-justify">
               <p>{{ object.content }}</p>
           </div>
+          {% if user.is_staff %}
+          <div class="text-left mt-2">
+            <a class="btn btn-outline-info btn-sm" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="btn btn-outline-danger btn-sm ml-2" href="{% url 'post-delete' object.id %}">Delete</a>
+          </div>
+
+          {% endif %}
       </div>
   </div>
 {% endblock content %}
