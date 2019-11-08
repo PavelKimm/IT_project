@@ -2,21 +2,18 @@
 {% load static %}
 
 {% block content %}
-  {% for post in posts %}
   <div class="single-blog text-center wow fadeIn">
       <div class="blog-image-sldie">
           <img src="{% static 'news/img/blog/main_blog/test.jpg' %}" alt="">
       </div>
       <div class="blog-details">
           <div class="title-and-meta text-left">
-              <h3><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
-              <p class="post-meta">Author:<a href="#">{{ post.author }}</a>|<a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
+              <h3 class="article-title">{{ object.title }}</h3>
+              <p class="post-meta">Author:<a href="#">{{ object.author }}</a>|<a>{{ object.date_posted|date:"j M Y, H:i" }}</a></p>
           </div>
           <div class="blog-content text-justify">
-              <p>{{ post.content }}</p>
-              <a href="{% url 'post-detail' post.id %}" class="read-more">Read more</a>
+              <p>{{ object.content }}</p>
           </div>
       </div>
   </div>
-  {% endfor %}
 {% endblock content %}
