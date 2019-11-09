@@ -3,7 +3,9 @@
 
 {% block content %}
   {% if user.is_staff %}
-    <a class="btn btn-outline-success" href="{% url 'post-create' %}">Create a new post</a>
+  <div class="text-center">
+    <a class="btn btn-outline-success wide-button" href="{% url 'post-create' %}">Create a new post</a>
+  </div>
   {% endif %}
   {% for post in posts %}
   <div class="single-blog text-center wow fadeIn">
@@ -13,7 +15,7 @@
       <div class="blog-details">
           <div class="title-and-meta text-left">
               <h3><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
-              <p class="post-meta">Author:<a href="#">{{ post.author }}</a>|<a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
+              <p class="post-meta">Author:<a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>|<a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
           </div>
           <div class="blog-content text-justify">
               <p>{{ post.content }}</p>
@@ -22,4 +24,5 @@
       </div>
   </div>
   {% endfor %}
+
 {% endblock content %}
