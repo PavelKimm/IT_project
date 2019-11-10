@@ -8,9 +8,28 @@
    margin-left: 0.5rem !important;
  }
 
+ .ml-5,
+ .mx-5 {
+   margin-left: 1.5rem !important;
+ }
+
  .mb-5,
  .my-5 {
    margin-bottom: 5rem !important;
+ }
+
+ .pb-4,
+ .py-4 {
+   padding-bottom: 1.5rem !important;
+ }
+
+ .mb-4,
+ .my-4 {
+   margin-bottom: 1.5rem !important;
+ }
+
+ a.forgot-pass {
+  color: #777;
  }
 
  a.sign-in, a.sign-up {
