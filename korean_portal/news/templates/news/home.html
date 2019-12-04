@@ -9,11 +9,11 @@
   {% endif %}
   {% for post in posts %}
   <div class="single-blog text-center wow fadeIn">
-      <div class="blog-image-sldie">
-          <img src="{% static 'news/img/blog/main_blog/test.jpg' %}" alt="">
+      <div class="blog-image-slide">
+          <img src="{{ post.image.url }}" alt="img">
       </div>
       <div class="blog-details">
-          <div class="title-and-meta text-left">
+          <div class="title-and-meta text-center">
               <h3><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
               <p class="post-meta">Author:<a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>|<a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
           </div>

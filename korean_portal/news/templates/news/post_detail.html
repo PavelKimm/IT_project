@@ -3,8 +3,8 @@
 
 {% block content %}
   <div class="single-blog text-center wow fadeIn">
-      <div class="blog-image-sldie">
-          <img src="{% static 'news/img/blog/main_blog/test.jpg' %}" alt="">
+      <div class="blog-image-slide">
+          <img src="{{ post.image.url }}" alt="img">
       </div>
       <div class="blog-details">
           <div class="title-and-meta text-left">

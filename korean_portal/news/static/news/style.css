@@ -1598,10 +1598,6 @@ ul.page-pagination li a {
     padding-bottom: 50px;
 }
 
-.single-blog img {
-    width: 100%;
-}
-
 .title-and-meta {
     margin-bottom: 30px;
     margin-top: 30px;
@@ -1639,7 +1635,7 @@ ul.page-pagination li a {
     margin-bottom: 0;
 }
 
-.blog-image-sldie .owl-nav > div {
+.blog-image-slide .owl-nav > div {
     background: #fff none repeat scroll 0 0;
     color: #1a1a1a;
     display: inline-block;
@@ -1652,11 +1648,11 @@ ul.page-pagination li a {
     width: 40px;
 }
 
-.blog-image-sldie .owl-nav > div.owl-next {
+.blog-image-slide .owl-nav > div.owl-next {
     right: -2px;
 }
 
-.blog-image-sldie .owl-nav > div.owl-prev {
+.blog-image-slide .owl-nav > div.owl-prev {
     left: 0;
 }
 

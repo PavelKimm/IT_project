@@ -102,11 +102,11 @@
                       <div class="single-sidebar-widget catagories-widget wow fadeIn">
                           <h4>Categories</h4>
                           <ul>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>История корейцев</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Обычаи и традиции корейского народа</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Корейская кухня</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Досуг, хобби</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Videos</a></li>
+                              <li><a href="#"><i class="fa fa-angle-right"></i>History of the Koreans</a></li>
+                              <li><a href="#"><i class="fa fa-angle-right"></i>Korean cuisine</a></li>
+                              <li><a href="#"><i class="fa fa-angle-right"></i>Traditions and customs</a></li>
+                              <li><a href="#"><i class="fa fa-angle-right"></i>Leisure and hobbies</a></li>
+                              <li><a href="#"><i class="fa fa-angle-right"></i>Photos and videos</a></li>
                           </ul>
                       </div>
                       <div class="single-sidebar-widget social-widget wow fadeIn">
@@ -121,33 +121,17 @@
                       <div class="single-sidebar-widget post-widget wow fadeIn">
                           <h4>Top Posts</h4>
                           <ul>
+                              {% for post in posts %}
                               <li class="s_post">
                                   <div class="post-tumb alignleft">
-                                      <a href="#"><img src="img/blog/thumb/2.jpg" alt=""></a>
+                                      <a href="#"><img src="{{ post.image.url }}" alt="img"></a>
                                   </div>
                                   <div class="post-title-and-date">
-                                      <h4><a href="#">Do you know how ...?</a></h4>
-                                      <p class="post-meta"><a href="#">Jan 25, 2017</a></p>
+                                      <h4><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
+                                      <p class="post-meta"><a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
                                   </div>
                               </li>
-                              <li class="s_post">
-                                  <div class="post-tumb alignleft">
-                                      <a href="#"><img src="img/blog/thumb/3.jpg" alt=""></a>
-                                  </div>
-                                  <div class="post-title-and-date">
-                                      <h4><a href="#">Why we provide best service?</a></h4>
-                                      <p class="post-meta"><a href="#">Dec 25, 2017</a></p>
-                                  </div>
-                              </li>
-                              <li class="s_post">
-                                  <div class="post-tumb alignleft">
-                                      <a href="#"><img src="img/blog/thumb/4.jpg" alt=""></a>
-                                  </div>
-                                  <div class="post-title-and-date">
-                                      <h4><a href="#">How to make a ... ?</a></h4>
-                                      <p class="post-meta"><a href="#">Nov 25, 2017</a></p>
-                                  </div>
-                              </li>
+                              {% endfor %}
                           </ul>
                       </div>
                       <div class="single-sidebar-widget instagram-widget wow fadeIn">
