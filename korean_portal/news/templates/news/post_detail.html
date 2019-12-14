@@ -6,21 +6,52 @@
       <div class="blog-image-slide">
           <img src="{{ post.image.url }}" alt="img">
       </div>
+
+      <div class="button-center">
+          {% if user.is_staff %}
+              <div class="text-left mt-2">
+                <a class="btn btn-outline-info btn-sm" href="{% url 'post-update' pk %}">Update</a>
+                <a class="btn btn-outline-danger btn-sm ml-2" href="{% url 'post-delete' pk %}">Delete</a>
+              </div>
+          {% endif %}
+      </div>
+
       <div class="blog-details">
           <div class="title-and-meta text-left">
-              <h3 class="article-title">{{ object.title }}</h3>
+              <h2 class="article-title">{{ object.title }}</h2>
               <p class="post-meta">Author:<a href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>|<a>{{ object.date_posted|date:"j M Y, H:i" }}</a></p>
           </div>
           <div class="blog-content text-justify">
               <p>{{ object.content }}</p>
           </div>
-          {% if user.is_staff %}
-          <div class="text-left mt-2">
-            <a class="btn btn-outline-info btn-sm" href="{% url 'post-update' object.id %}">Update</a>
-            <a class="btn btn-outline-danger btn-sm ml-2" href="{% url 'post-delete' object.id %}">Delete</a>
+      </div>
+      <div class="post-comments">
+          <div class="title-and-meta text-left">
+              <h2 class="comments-section">Comments</h2>
           </div>
 
-          {% endif %}
+          {% for comment in post.comments.all %}
+              <div class="text-left">
+                  <p class="post-meta">Sender:<a href="{% url 'user-posts' comment.sender.username %}">{{ comment.sender }}</a>|
+                      <a>{{ comment.created|date:"j M Y, H:i" }}</a>
+                  </p>
+                  <p>{{ comment.content }}</p>
+              </div>
+          {% empty %}
+              <h4 class="text-left">There are no comments</h4>
+          {% endfor %}
+
+          <form method="POST" class="text-left add-comment">
+              {% csrf_token %}
+              {{ comment_form.as_p }}
+              {% if request.user.is_authenticated %}
+                <input type="submit" value="Submit" class="btn btn-outline-success">
+              {% else %}
+                <input type="submit" value="Submit" class="btn btn-outline-success" disabled>
+              {% endif %}
+
+          </form>
       </div>
+
   </div>
 {% endblock content %}

@@ -1,23 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
-    DetailView,
     CreateView,
     UpdateView,
     DeleteView
 )
-from .models import Post
 
-
-def home(request):
-    context = {
-        'posts': Post.objects.all(),
-        'title': 'Main',
-        'news_home': True
-    }
-    return render(request, 'news/home.html', context)
+from news.forms import CommentForm
+from .models import Post, Comment
 
 
 class PostListView(ListView):
@@ -37,10 +30,6 @@ class UserPostListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
-
-
-class PostDetailView(DetailView):
-    model = Post
 
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
@@ -81,6 +70,15 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+def home(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'Main',
+        'news_home': True
+    }
+    return render(request, 'news/home.html', context)
+
+
 def about(request):
     context = {
         'posts': Post.objects.all(),
@@ -89,3 +87,29 @@ def about(request):
     }
 
     return render(request, 'news/about.html', context)
+
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    comments = Comment.objects.filter(post=post).order_by('-id')
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+        if comment_form.is_valid():
+            content = request.POST.get('content')
+            comment = Comment.objects.create(post=post,
+                                             sender=request.user,
+                                             content=content)
+            comment.save()
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        comment_form = CommentForm()
+
+    context = {
+        'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
+        'pk': pk,
+        'object': post
+    }
+    return render(request, 'news/post_detail.html', context)

@@ -1,0 +1,20 @@
+{% extends 'news/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  <div class="content-section">
+    <form method="POST">
+      {% csrf_token %}
+
+        <legend class="border-bottom mb-4">New comment</legend>
+{#          <div>{{ form.author | as_crispy_field }}</div>#}
+          <div>{{ comment_form.as_p }}</div>
+{#          <div>{{ form.post | as_crispy_field }}</div>#}
+
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

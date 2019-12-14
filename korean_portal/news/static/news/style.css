@@ -137,6 +137,9 @@ input:-webkit-autofill:focus {
     background: #f3f4f4;
 }
 
+.add-comment {
+    margin-top: 5em;
+}
 
 /*--------------------------
     2. TOP AREA
