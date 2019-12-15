@@ -9,6 +9,11 @@
   height: auto;
 }
 
+.blog-image-slide.post-detail > img {
+  width: 80%;
+  height: auto;
+}
+
  .ml-2,
  .mx-2 {
    margin-left: 0.5rem !important;

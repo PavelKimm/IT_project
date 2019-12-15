@@ -3,7 +3,7 @@
 
 {% block content %}
   <div class="single-blog text-center wow fadeIn">
-      <div class="blog-image-slide">
+      <div class="blog-image-slide post-detail">
           <img src="{{ post.image.url }}" alt="img">
       </div>
 
@@ -26,30 +26,52 @@
           </div>
       </div>
       <div class="post-comments">
-          <div class="title-and-meta text-left">
+          <div class="text-left">
               <h2 class="comments-section">Comments</h2>
           </div>
 
-          {% for comment in post.comments.all %}
+          {% for comment in comments %}
+              <hr>
               <div class="text-left">
                   <p class="post-meta">Sender:<a href="{% url 'user-posts' comment.sender.username %}">{{ comment.sender }}</a>|
                       <a>{{ comment.created|date:"j M Y, H:i" }}</a>
                   </p>
                   <p>{{ comment.content }}</p>
               </div>
+              {% if user == comment.sender %}
+              <div class="text-left">
+                  <a href="{% url 'comment-delete' comment.id %}">удалить</a>
+              </div>
+              {% endif %}
+              <hr>
           {% empty %}
               <h4 class="text-left">There are no comments</h4>
           {% endfor %}
 
+          <div class="pagination">
+              <span class="step-links">
+                    {% if comments.has_previous %}
+                        <a href="?page={{ comments.previous_page_number }}">предыдущая</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Стр. {{ comments.number }} из {{ comments.paginator.num_pages }}.
+                    </span>
+
+                    {% if comments.has_next %}
+                        <a href="?page={{ comments.next_page_number }}">следующая</a>
+                    {% endif %}
+              </span>
+          </div>
+
           <form method="POST" class="text-left add-comment">
               {% csrf_token %}
-              {{ comment_form.as_p }}
               {% if request.user.is_authenticated %}
+                {{ comment_form.as_p }}
                 <input type="submit" value="Submit" class="btn btn-outline-success">
               {% else %}
-                <input type="submit" value="Submit" class="btn btn-outline-success" disabled>
+                <h5>Для того чтобы оставить комментарий – авторизуйтесь!</h5>
               {% endif %}
-
           </form>
       </div>
 

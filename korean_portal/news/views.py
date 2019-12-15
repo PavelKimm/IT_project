@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -90,8 +92,18 @@ def about(request):
 
 
 def post_detail(request, pk):
+    posts = Post.objects.all()
     post = get_object_or_404(Post, id=pk)
-    comments = Comment.objects.filter(post=post).order_by('-id')
+    comments_list = Comment.objects.filter(post=post).order_by('-id')
+    paginator = Paginator(comments_list, 3)
+
+    page = request.GET.get('page')
+    try:
+        comments = paginator.page(page)
+    except PageNotAnInteger:
+        comments = paginator.page(1)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
@@ -106,6 +118,7 @@ def post_detail(request, pk):
         comment_form = CommentForm()
 
     context = {
+        'posts': posts,
         'post': post,
         'comments': comments,
         'comment_form': comment_form,
@@ -113,3 +126,11 @@ def post_detail(request, pk):
         'object': post
     }
     return render(request, 'news/post_detail.html', context)
+
+
+@login_required
+def comment_delete(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if request.user == comment.sender:
+        Comment.objects.filter(id=comment_id).delete()
+        return redirect('post-detail', pk=comment.post_id)

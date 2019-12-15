@@ -20,14 +20,17 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
-        basewidth = 300
         img = Image.open(self.image.path)
-        w_percent = (basewidth / float(img.size[0]))
-        h_size = int((float(img.size[1]) * float(w_percent)))
-
-        if img.height > 800 or img.width > 800:
-            img.thumbnail((basewidth, h_size))
+        max_size = 800
+        if img.height > max_size:
+            h_percent = max_size / float(img.size[1])
+            w_size = int(float(img.size[0]) * h_percent)
+            img.thumbnail((w_size, max_size))
+            img.save(self.image.path)
+        if img.width > max_size:
+            w_percent = max_size / float(img.size[0])
+            h_size = int(float(img.size[1]) * w_percent)
+            img.thumbnail((max_size, h_size))
             img.save(self.image.path)
 
 
