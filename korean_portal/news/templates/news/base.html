@@ -35,8 +35,7 @@
                           <ul id="nav" class="nav navbar-nav cl-effect-11">
                             <li class="{% if news_home %}active{% endif %}"><a href="{% url 'news-home' %}">Main</a></li>
                             <li class="{% if news_about %}active{% endif %}"><a href="{% url 'news-about' %}">About Us</a></li>
-                            <li class="{% if news_events %}active{% endif %}"><a href="events.html">Events</a></li>
-                            <li class="{% if news_contacts %}active{% endif %}"><a href="contact-us.html">Contacts</a></li>
+                            <li class="{% if news_contacts %}active{% endif %}"><a href="{% url 'news-contacts' %}">Contacts</a></li>
                             {% if user.is_authenticated %}
                               <li class="{% if users_profile %}active{% endif %}"><a href="{% url 'profile' %}">Profile</a></li>
                               <li><a href="{% url 'logout' %}">Log Out</a></li>
@@ -96,11 +95,11 @@
                       <div class="single-sidebar-widget catagories-widget wow fadeIn">
                           <h4>Categories</h4>
                           <ul>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>History of the Koreans</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Korean cuisine</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Traditions and customs</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Leisure and hobbies</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i>Photos and videos</a></li>
+                              <li><a href="{% url 'news-history' %}"><i class="fa fa-angle-right"></i>History of the Koreans</a></li>
+                              <li><a href="{% url 'news-cuisine' %}"><i class="fa fa-angle-right"></i>Korean cuisine</a></li>
+                              <li><a href="{% url 'news-traditions' %}"><i class="fa fa-angle-right"></i>Traditions and customs</a></li>
+                              <li><a href="{% url 'news-leisure' %}"><i class="fa fa-angle-right"></i>Leisure and hobbies</a></li>
+                              <li><a href="{% url 'news-gallery' %}"><i class="fa fa-angle-right"></i>Photos and videos</a></li>
                           </ul>
                       </div>
                       <div class="single-sidebar-widget social-widget wow fadeIn">

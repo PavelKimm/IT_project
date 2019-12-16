@@ -22,6 +22,11 @@ class PostListView(ListView):
     ordering = ['-date_posted']
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(PostListView, self).get_context_data(**kwargs)
+        context['news_home'] = True
+        return context
+
 
 class UserPostListView(ListView):
     model = Post
@@ -72,25 +77,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-def home(request):
-    context = {
-        'posts': Post.objects.all(),
-        'title': 'Main',
-        'news_home': True
-    }
-    return render(request, 'news/home.html', context)
-
-
-def about(request):
-    context = {
-        'posts': Post.objects.all(),
-        'title': 'About Us',
-        'news_about': True
-    }
-
-    return render(request, 'news/about.html', context)
-
-
 def post_detail(request, pk):
     posts = Post.objects.all()
     post = get_object_or_404(Post, id=pk)
@@ -134,3 +120,61 @@ def comment_delete(request, comment_id):
     if request.user == comment.sender:
         Comment.objects.filter(id=comment_id).delete()
         return redirect('post-detail', pk=comment.post_id)
+
+
+def about(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'About Us',
+        'news_about': True
+    }
+    return render(request, 'news/about.html', context)
+
+
+def contacts(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'Contacts',
+        'news_contacts': True
+    }
+    return render(request, 'news/contacts.html', context)
+
+
+def history(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'History of the Koreans'
+    }
+    return render(request, 'news/history.html', context)
+
+
+def cuisine(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'Korean cuisine'
+    }
+    return render(request, 'news/cuisine.html', context)
+
+
+def traditions(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'Korean traditions'
+    }
+    return render(request, 'news/traditions.html', context)
+
+
+def leisure(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'Korean leisure'
+    }
+    return render(request, 'news/leisure.html', context)
+
+
+def gallery(request):
+    context = {
+        'posts': Post.objects.all(),
+        'title': 'Gallery'
+    }
+    return render(request, 'news/gallery.html', context)
