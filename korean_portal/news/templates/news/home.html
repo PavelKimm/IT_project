@@ -3,26 +3,26 @@
 
 {% block content %}
   {% if user.is_staff %}
-  <div class="text-center">
-    <a class="btn btn-outline-success wide-button" href="{% url 'post-create' %}">Create a new post</a>
-  </div>
+      <div class="create-post text-center single-blog">
+        <a class="btn btn-outline-success wide-button" href="{% url 'post-create' %}">Create a new post</a>
+      </div>
   {% endif %}
   {% for post in posts %}
-  <div class="single-blog text-center wow fadeIn">
-      <div class="blog-image-slide">
-          <img src="{{ post.image.url }}" alt="img">
-      </div>
-      <div class="blog-details">
-          <div class="title-and-meta text-center">
-              <h3><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
-              <p class="post-meta">Author:<a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>|<a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
+      <div class="single-blog text-center wow fadeIn">
+          <div class="blog-image-slide">
+              <img src="{{ post.image.url }}" alt="img">
           </div>
-          <div class="blog-content text-justify">
-              <p>{{ post.content }}</p>
-              <a href="{% url 'post-detail' post.id %}" class="read-more">Read more</a>
+          <div class="blog-details">
+              <div class="title-and-meta text-center">
+                  <h3><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+                  <p class="post-meta">Author:<a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>|<a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
+              </div>
+              <div class="blog-content text-justify">
+                  <p>{{ post.content }}</p>
+                  <a href="{% url 'post-detail' post.id %}" class="read-more">Read more</a>
+              </div>
           </div>
       </div>
-  </div>
   {% endfor %}
 
 {% endblock content %}

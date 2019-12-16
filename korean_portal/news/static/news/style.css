@@ -141,6 +141,10 @@ input:-webkit-autofill:focus {
     margin-top: 5em;
 }
 
+.create-post {
+    margin: 0 0 100px 0;
+}
+
 /*--------------------------
     2. TOP AREA
 ---------------------------*/
