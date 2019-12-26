@@ -1,0 +1,7 @@
+asgiref
+Django
+django-crispy-forms
+Pillow
+psycopg2
+pytz
+sqlparse

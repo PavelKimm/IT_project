@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Video, news, korean" />
+    <!--====== TITLE TAG ======-->
+    {% if title %}
+      <title>Korean Portal – {{ title }}</title>
+    {% else %}
+      <title>Korean Portal</title>
+    {% endif %}
+    <!--====== ICON =======-->
+    <link rel="shortcut icon" type="image/ico" href="{% static 'news/img/icon.png' %}">
+    <!--====== STYLESHEETS ======-->
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'news/style.css' %}">
+
+    <script src="{% static 'news/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+</head>
+
+<body>
+  <!--START TOP AREA-->
+  <header class="top-area single-page blog-page" id="home">
+      <div class="page-barner-bg"></div>
+      <div class="header-top-area">
+          <!--MAINMENU AREA-->
+          <div class="mainmenu-area" id="mainmenu-area">
+              <div class="mainmenu-area-bg"></div>
+              <nav class="navbar">
+                  <div class="container">
+                      <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
+                          <ul id="nav" class="nav navbar-nav cl-effect-11">
+                            <li class="{% if news_home %}active{% endif %}"><a href="{% url 'news-home' %}">Main</a></li>
+                            <li class="{% if news_about %}active{% endif %}"><a href="{% url 'news-about' %}">About Us</a></li>
+                            <li class="{% if news_contacts %}active{% endif %}"><a href="{% url 'news-contacts' %}">Contacts</a></li>
+                            {% if user.is_authenticated %}
+                              <li class="{% if users_profile %}active{% endif %}"><a href="{% url 'profile' %}">Profile</a></li>
+                              <li><a href="{% url 'logout' %}">Log Out</a></li>
+                            {% else %}
+                              <li class="{% if users_auth %}active{% endif %}"><a class="at-drop-down" href="#">Auth<i class="hidden-md hidden-lg fa fa-angle-down"></i></a>
+                                <ul class="sub-menu">
+                                  <li><a href="{% url 'login' %}">Log In</a></li>
+                                  <li><a href="{% url 'register' %}">Register</a></li>
+                                </ul>
+                              </li>
+                            {% endif %}
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+          <!--END MAINMENU AREA END-->
+      </div>
+
+      <!--PAGE BARNER AREA-->
+      <div class="page-barner-area">
+          <div class="container wow fadeIn">
+              <div class="row">
+                  <div class="col-md-12 col-xs-12">
+                      <div class="barner-text">
+                          <h1><span>Korean association</span></h1>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--PAGE BARNER AREA END-->
+
+  </header>
+  <!--END TOP AREA-->
+
+  <!--NEWS AREA-->
+  <section class="blog-page blog-area section-padding">
+      <div class="container">
+          <div class="row">
+
+              <!--MAIN CONTENT-->
+              <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
+              </div>
+
+              <!--SIDEBAR-->
+              <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                  <div class="blog-sidebar">
+                      <div class="single-sidebar-widget catagories-widget wow fadeIn">
+                          <h4>Categories</h4>
+                          <ul>
+                              <li><a href="{% url 'news-history' %}"><i class="fa fa-angle-right"></i>History of the Koreans</a></li>
+                              <li><a href="{% url 'news-cuisine' %}"><i class="fa fa-angle-right"></i>Korean cuisine</a></li>
+                              <li><a href="{% url 'news-traditions' %}"><i class="fa fa-angle-right"></i>Traditions and customs</a></li>
+                              <li><a href="{% url 'news-leisure' %}"><i class="fa fa-angle-right"></i>Leisure and hobbies</a></li>
+                              <li><a href="{% url 'news-gallery' %}"><i class="fa fa-angle-right"></i>Photos and videos</a></li>
+                          </ul>
+                      </div>
+                      <div class="single-sidebar-widget social-widget wow fadeIn">
+                          <h4>Connect With Us</h4>
+                          <ul>
+                              <li class="s_facebook"><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                              <li class="s_twitter"><a target="_blank" href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                              <li class="s_instagram"><a target="_blank" href="https://instagram.com/"><i class="fa fa-instagram"></i></a></li>
+                              <li class="s_youtube"><a target="_blank" href="https://youtube.com/"><i class="fa fa-youtube"></i></a></li>
+                          </ul>
+                      </div>
+                      <div class="single-sidebar-widget post-widget wow fadeIn">
+                          <h4>Top Posts</h4>
+                          <ul>
+                              {% for post in posts %}
+                              <li class="s_post">
+                                  <div class="post-tumb alignleft">
+                                      <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt="img"></a>
+                                  </div>
+                                  <div class="post-title-and-date">
+                                      <h4><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
+                                      <p class="post-meta"><a>{{ post.date_posted|date:"j M Y, H:i" }}</a></p>
+                                  </div>
+                              </li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              {% if is_paginated %}
+                <div class="row">
+                  <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
+                    <ul class="page-pagination margin-top">
+
+                      {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+                      {% endif %}
+
+                      {% for num in page_obj.paginator.page_range %}
+                          {% if num == page_obj.number %}
+                            <li class="active"><a href="?page={{ num }}">{{ num }}</a></li>
+                          {% endif %}
+                      {% endfor %}
+
+                      {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+                      {% endif %}
+
+                    </ul>
+                  </div>
+                </div>
+              {% endif %}
+
+          </div>
+      </div>
+  </section>
+  <!--NEWS AREA END-->
+
+  <div class="footer-area">
+      <div class="container wow fadeIn">
+          <div class="row">
+              <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                  <div class="footer-top section-padding text-center">
+                      <div class="footer-address">
+                          <p>Tomsk, Russia</p>
+                          <p><a href="mailto:test@gmail.com">test@example.com</a></p>
+                          <p><a href="callto:+79061234567">+7(906)123-45-67</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                  <div class="footer-menu">
+                      <ul>
+                          <li><a href="#">Teams of use</a></li>
+                          <li><a href="#">Privicy Policy</a></li>
+                          <li><a href="#">SiteMap</a></li>
+                          <li><a href="#">Contact</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                  <div class="footer-copyright">
+                      <p>&copy; 2019 All Rights Reserved. Created by <a href="https://github.com/PavelKimm">Pavel Kim</a>.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script src="{% static 'news/js/jquery-3.3.1.slim.min.js' %}"></script>
+  <script src="{% static 'news/js/popper.min.js' %}"></script>
+  <script src="{% static 'news/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
